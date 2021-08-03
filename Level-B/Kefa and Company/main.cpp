@@ -32,30 +32,31 @@ using namespace std;
 #define MOD 1000000007
 #define EPS 1e-8
 
-double calc(double b, double c, double mid) {
-    return (mid * mid + b * mid + c) / sin(mid);
-}
-
 void solve() {
-    double b, c;
-    cin >> b >> c;
-    double lo = 0, hi = M_PI_2, mid1, mid2;
-    double x1, x2;
-    while (hi - lo > EPS) {
-        double part = (hi - lo) / 3;
-        mid1 = part + lo, mid2 = hi - part;
-        x1 = calc(b, c, mid1);
-        x2 = calc(b, c, mid2);
-        if (x1 > x2) lo = mid1;
-        else hi = mid2;
+    ll n, d, fac = 0, ans = 0;
+    cin >> n >> d;
+    vpi friends(n);
+    for (int i = 0; i < n; ++i) {
+        int x, y;
+        cin >> x >> y;
+        friends[i].first = x;
+        friends[i].second = y;
     }
-    cout << fixed << setprecision(10) << calc(b, c, lo) << endl;
+    srt(friends);
+    int i = 0, j = 0;
+    while (i < friends.size()) {
+        while (j < friends.size()) {
+            if (abs(friends[i].first - friends[j].first) < d) fac += friends[j].second, j++;
+            else break;
+        }
+        ans = max(ans, fac);
+        fac -= friends[i].second, i++;
+    }
+    cout << ans << endl;
 }
 
 int main() {
     IOS
-    int t;
-    cin >> t;
-    while (t--) solve();
+    solve();
     return 0;
 }
