@@ -1,1 +1,0 @@
-Link to the problem: https://www.spoj.com/problems/BPM/
