@@ -32,9 +32,8 @@ using namespace std;
 ll summation(multiset<ll> &W, ll boxHeight, ll boxWidth) {
     ll boxSpace = boxWidth;
     while (!W.empty()) {
-        auto itr = W.upper_bound(boxSpace);
-        if (itr != W.begin()) {
-            itr--;
+        auto itr = --W.upper_bound(boxSpace);
+        if (*itr <= boxSpace) {
             ll found = *itr;
             if (boxSpace < 0) break;
             W.erase(itr);
