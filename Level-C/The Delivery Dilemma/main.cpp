@@ -1,0 +1,72 @@
+#include <iostream>
+#include <string>
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define ll long long
+#define pb push_back
+#define mp make_pair
+#define vi vector<int>
+#define vll vector<ll>
+#define vc vector<char>
+#define pi pair<int,int>
+#define pll pair<ll,ll>
+#define vpi vector<pi>
+#define all(v)            ((v).begin()), ((v).end())
+#define maxv(a)      (*max_element((a).begin(), (a).end()))
+#define bsrch(a, n)    (binary_search((a).begin(), (a).end(), n))
+#define srt(a)     (sort((a).begin(), (a).end()))
+#define revsrt(a)     (sort((a).rbegin(), (a).rend()))
+#define rev(a)  (reverse((a).begin(), (a).end()))
+#define sum(a)      (accumulate((a).begin(), (a).end(), 0ll))
+#define cnt(a, i)  (count((a).begin(), (a).end(), i))
+#define coutv(a)     for(int i = 0; i < (a).size(); i++) {cout << (a)[i] << " ";}
+#define cinv(a)     for(int i = 0; i < (a).size(); i++){cin >> (a)[i];}
+#define cinvP1(a)     for(int i = 0; i < (a).size(); i++){cin >> (a)[i].first;}
+#define cinvP2(a)     for(int i = 0; i < (a).size(); i++){cin >> (a)[i].second;}
+#define isfind(a, s)  a.find(s) != (a).npos
+#define IOS ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+#define rep(i, a, b)    for(int (i) = a; (i) < (b); (i)++)
+vector<pair<ll, ll>> ab;
+
+bool good(ll m) {
+    ll t = 0;
+    for (auto & i : ab)
+        if (i.first > m)
+            t += i.second;
+
+    return t <= m;
+}
+
+
+void solve() {
+    ll n;
+    cin >> n;
+    ab.resize(n);
+    for (int i = 0; i < n; ++i)
+        cin >> ab[i].first;
+    for (int i = 0; i < n; ++i)
+        cin >> ab[i].second;
+
+    ll l = 0, h = 2e9;
+
+    while (h > l + 1) {
+        ll m = (l + h) / 2;
+        if (good(m))
+            h = m;
+        else
+            l = m;
+    }
+
+    cout << h << "\n";
+}
+
+int main() {
+    IOS
+    int t;
+    cin >> t;
+    while (t--)
+        solve();
+    return 0;
+}
