@@ -44,28 +44,23 @@ void solve() {
 
     int temp = k;
     for (int i = 1; i <= 2 * n && temp > 0; ++i) {
-        if (s.find(i) != s.end())
-            continue;
-        else {
-            ans2 += max(mx - i, 0);
+        if (s.find(i) == s.end()) {
+            ans1 += max(mx - i, 0);
             temp--;
         }
     }
 
-    temp = k;
-    if (mx == 2 * n)
-        temp = 1;
-    for (int i = 1; i <= 2 * n && temp > 0; ++i) {
-        if (s.find(i) != s.end())
-            continue;
-        else {
-            ans1 += max(2 * n - i, 0);
-            temp--;
+    if (mx != 2 * n)
+        k--;
+    for (int i = 1; i <= 2 * n && k > 0; ++i) {
+        if (s.find(i) == s.end()) {
+            ans2 += max(2 * n - i, 0);
+            k--;
         }
     }
 
 
-    cout << max(ans1, ans2) << '\n';
+    cout << max(ans2, ans1) << '\n';
 }
 
 int main() {
